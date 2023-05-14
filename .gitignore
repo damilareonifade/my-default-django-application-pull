@@ -1,0 +1,11 @@
+/venv
+.env
+/css
+/js
+/scss
+/to_do_for.txt
+*.css*
+*.js*
+*.scss*
+*.woff*
+*.svg*
