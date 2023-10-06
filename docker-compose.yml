@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  django:
+    image: django:django
+    volumes:
+      - .:/django    
+    ports:
+      - "8000:8000"
+    container_name: graphql_container
+    command: python manage.py runserver 0.0.0.0:8000
+    depends_on:
+      - postgres
+    
+  
+  postgres:
+    image: postgres
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    container_name: postgres_db
+
+  docker_nginx:
+    image: docker_nginx
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
+    container_name: graphql_nginx
